@@ -1,46 +1,47 @@
-# Linha Clara — demonstração para confecções
+# Ilha Prints — demo de gestão para gráfica
 
-Demonstração comercial de um sistema operacional sob medida para confecções, uniformes, estamparias e operações semelhantes. Todos os dados são fictícios; esta não é uma solução universal nem um ERP completo.
+Demonstração comercial, com dados fictícios, de um sistema operacional para gráfica e comunicação visual. A experiência centraliza pedido, prova de arte, aprovação por versão, produção, materiais e instalação.
 
-## Stack e execução
+## O que funciona
 
-Requer Node.js 22+ e pnpm.
+- dashboard com indicadores e alertas derivados do estado;
+- busca e filtros de pedidos, detalhe operacional e histórico;
+- arte com versões imutáveis e distinção entre versão atual e aprovada;
+- portal demonstrativo para aprovar uma versão exata ou solicitar alteração;
+- quadro de produção com gate de aprovação;
+- orçamentos, incluindo conversão única de orçamento aprovado em pedido;
+- clientes, materiais, reservas, disponibilidade e faltas;
+- criação de pedidos, persistência local e restauração da massa fictícia.
+
+## Stack
+
+React, TypeScript, Vite, React Router, date-fns, lucide-react e localStorage. Não há backend, login real ou integração externa.
+
+## Executar
 
 ```bash
-pnpm install
-pnpm dev
+npm ci
+npm run dev
 ```
 
-Checks e build:
+Validação:
 
 ```bash
-pnpm lint
-pnpm typecheck
-pnpm test
-pnpm build
-pnpm preview
+npm run lint
+npm run typecheck
+npm run build
+npm run preview
 ```
 
 ## Estrutura
 
-- `src/data.ts`: seed único, coerente e relativo ao dia atual.
-- `src/store.tsx`: estado React, operações e persistência versionada em `localStorage`.
-- `src/selectors.ts`: indicadores, alertas, estoque e agregados derivados.
-- `src/App.tsx`: rotas, telas e fluxos da demonstração.
-- `src/styles.css`: design responsivo mobile-first, sem assets externos.
+- `src/data/seed.ts`: dados fictícios com datas relativas ao dia do primeiro carregamento;
+- `src/types/domain.ts`: contratos de pedidos, artes, aprovações, orçamentos e materiais;
+- `src/lib/selectors.ts`: indicadores, alertas e regras derivadas;
+- `src/hooks/usePrintStore.ts`: ações e persistência versionada;
+- `src/App.tsx`: módulos, fluxos e portal demonstrativo;
+- `src/index.css`: sistema visual e responsividade.
 
-As rotas usam `HashRouter`, por exemplo `/#/pedidos` e `/#/producao`, para funcionar diretamente no GitHub Pages.
+Para restaurar os dados iniciais, use **Restaurar demo** no menu lateral. O armazenamento incompatível ou inválido é descartado de forma segura e substituído por um novo seed.
 
-## Personalização por link
-
-- `?empresa=AGV%20Confecções`
-- `?cor=2563eb`
-- combinação: `https://democonfec.github.io/?empresa=AGV%20Confecções&cor=2563eb#/`
-
-Os valores da URL são efêmeros, validados e não substituem o aviso de ambiente demonstrativo. A ação **Restaurar dados** recria o seed e mantém a política do tour separada.
-
-## GitHub Pages
-
-O repositório é um user site, portanto o Vite usa `base: '/'` e a URL esperada é `https://democonfec.github.io/`. O workflow `.github/workflows/deploy.yml` valida e publica `dist`.
-
-No GitHub, confirme uma vez: **Settings → Pages → Build and deployment → Source → GitHub Actions**.
+Esta demo não representa uma implantação real. Etapas, campos e regras podem ser adaptados após diagnóstico da operação.

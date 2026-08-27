@@ -1,7 +1,11 @@
-import react from '@vitejs/plugin-react';
-import { defineConfig } from 'vite';
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import { sites } from '@openai/sites-vite-plugin'
 
+// https://vite.dev/config/
 export default defineConfig({
-  base: '/',
-  plugins: [react()],
-});
+  plugins: [react(), sites()],
+  build: {
+    sourcemap: true,
+  },
+})
